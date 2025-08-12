@@ -13,204 +13,390 @@ It is the single source of truth for all API requests and responses.
 
 ---
 
-## Data Models
+API_CONTRACT  
 
-**User**
+1. Data Models  
 ```json
-{
-  "id": "string",
-  "username": "string",
-  "email": "string",
-  "created_at": "ISO8601 date"
+user {
+  id: string,
+  username: string,
+  email: string,
+  password: string (hashed),
+  phone: string,
+  dateOfBirth: string,
+  userType: standard | business,
+  companyName: string (optional),
+  companyAddress: string (optional),
+  publicProfileName: string (optional),
+  createdAt: string,
+  updatedAt: string
 }
-```
 
-**Recipe**
-```json
-{
-  "id": "string",
-  "title": "string",
-  "description": "string",
-  "ingredients": ["string"],
-  "instructions": "string",
-  "image_url": "string",
-  "author_id": "string",
-  "created_at": "ISO8601 date"
+Recipe {
+  id: string,
+  title: string,
+  description: string,
+  videoUrl: string,
+  ingredients: [string],
+  instructions: [string],
+  authorId: string,
+  isPurchasable: true,
+  createdAt: string,
+  updatedAt: string,
+  reviews: []
 }
-```
 
-**Comment**
-```json
-{
-  "id": "string",
-  "recipe_id": "string",
-  "author_id": "string",
-  "content": "string",
-  "created_at": "ISO8601 date"
+Order {
+  id: string,
+  userId: string,
+  recipeId: string,
+  status: pending | preparing | on_the_way | delivered | cancelled,
+  orderDate: string,
+  deliveryLocation: string,
+  paymentStatus: paid | unpaid,
+  createdAt: string
+}
+
+Review {
+  id: string,
+  recipeId: string,
+  userId: string,
+  rating: 0,
+  comment: string,
+  createdAt: string
+}
+
+ChatbotMessage {
+  id: string,
+  userId: string,
+  message: string,
+  response: string,
+  timestamp: string
+}
+
+Attachment {
+  id: string,
+  issueId: string,
+  fileUrl: string,
+  uploadedAt: string
 }
 ```
 
 ---
 
-## API Endpoints
+2. User Authentication & Profile  
 
-### 1. Register User
-**Method:** `POST`  
-**Path:** `/api/users/register`
+2.1 Register User  
+HTTP Method: POST  
+Endpoint Path: /api/auth/register  
+Description: Registers a new user.  
 
-**Request**
+Request Body:  
 ```json
 {
-  "username": "john_doe",
-  "email": "john@example.com",
-  "password": "securepassword"
+  "username": "new_user_jane",
+  "email": "jane.doe@example.com",
+  "password": "newPassword123",
+  "phone": "9876543210",
+  "dateOfBirth": "1995-03-22",
+  "userType": "standard"
 }
 ```
 
-**Success (201)**
+Business User Example:
 ```json
 {
-  "message": "User registered successfully",
-  "user_id": "u123"
+  "username": "super_chef",
+  "email": "super.chef@example.com",
+  "password": "superSecretPassword456",
+  "phone": "1234567890",
+  "dateOfBirth": "1988-07-10",
+  "userType": "business",
+  "companyName": "Gourmet Creations LLC",
+  "companyAddress": "456 Chef St, Newville",
+  "publicProfileName": "Super Chef's Bistro"
 }
 ```
 
-**Error (400)**
+
+Success:
 ```json
 {
-  "error": "Email already exists"
+  "success": true,
+  "message": "User registered successfully. Please verify with OTP.",
+  "data": { "id": "u123", "username": "new_user_jane" }
 }
 ```
+
+Error 409:
+```json
+{ "success": false, "message": "Email or username already registered" }
+```
+
+Error 400:
+```json
+{ "success": false, "message": "Missing required fields or invalid data" }
+```
+
 
 ---
 
-### 2. Login
-**Method:** `POST`  
-**Path:** `/api/users/login`
+2.2 Login  
+HTTP Method: POST  
+Endpoint Path: /api/auth/login  
+Description: Authenticates user and returns JWT token.  
 
-**Request**
+Request Body:  
 ```json
-{
-  "email": "john@example.com",
-  "password": "securepassword"
-}
+{ "email": "jane.doe@example.com", "password": "newPassword123" }
 ```
 
-**Success (200)**
+Success Response (200 OK):  
 ```json
 {
+  "success": true,
   "token": "jwt_token_here",
-  "user_id": "u123"
+  "user": { "id": "u123", "username": "new_user_jane" }
 }
 ```
 
-**Error (401)**
+Error:
 ```json
 {
-  "error": "Invalid email or password"
+  "success": false,
+  "message": "Invalid email or password"
 }
 ```
 
 ---
 
-### 3. Get All Recipes
-**Method:** `GET`  
-**Path:** `/api/recipes`
+2.3 View Profile  
+HTTP Method: GET  
+Endpoint Path: /api/users/me  
+Headers: Authorization: Bearer <token>  
 
-**Success (200)**
+Success Response (200 OK):  
 ```json
-[
-  {
-    "id": "r001",
-    "title": "Chocolate Cake",
-    "image_url": "/images/choco.jpg",
-    "author_id": "u123"
+{
+  "success": true,
+  "data": {
+    "id": "u123",
+    "name": "JJane Doe",
+    "email": "jane.doe@example.com",
+    "createdAt": "2025-08-11T10:00:00Z"
   }
-]
-```
-
----
-
-### 4. Create Recipe
-**Method:** `POST`  
-**Path:** `/api/recipes`
-
-**Request**
-```json
-{
-  "title": "Chocolate Cake",
-  "description": "Rich and moist cake",
-  "ingredients": ["Flour", "Sugar", "Cocoa", "Eggs"],
-  "instructions": "Mix and bake.",
-  "image_url": "/images/choco.jpg"
 }
 ```
 
-**Success (201)**
+Unauthorized:
 ```json
 {
-  "message": "Recipe created",
-  "recipe_id": "r001"
-}
-```
-
-**Error (400)**
-```json
-{
-  "error": "Missing required fields"
+  "success": false,
+  "message": "Unauthorized"
 }
 ```
 
 ---
 
-### 5. Get Recipe by ID
-**Method:** `GET`  
-**Path:** `/api/recipes/{id}`
+2.4 Update Profile  
+HTTP Method: PUT  
+Endpoint Path: /api/users/me  
+Description: Update name or password.  
 
-**Success (200)**
+Request Body:  
 ```json
 {
-  "id": "r001",
-  "title": "Chocolate Cake",
-  "description": "Rich and moist cake",
-  "ingredients": ["Flour", "Sugar", "Cocoa", "Eggs"],
-  "instructions": "Mix and bake.",
-  "image_url": "/images/choco.jpg",
-  "author_id": "u123"
+  "name": "Jane Updated",
+  "password": "newSecurePass"
 }
 ```
 
-**Error (404)**
+Success:
 ```json
 {
-  "error": "Recipe not found"
+  "success": true,
+  "data": {
+    "id": "u123",
+    "name": "John Updated",
+    "email": "john@example.com",
+    "updatedAt": "2025-08-12T10:00:00Z"
+  }
+}
+```
+
+Unauthorized:
+```json
+{
+  "success": false,
+  "message": "Unauthorized"
 }
 ```
 
 ---
 
-### 6. Add Comment
-**Method:** `POST`  
-**Path:** `/api/recipes/{id}/comments`
+3. Recipe Management 
 
-**Request**
+3.1 Create Recipe  
+HTTP Method: POST  
+Endpoint Path: /api/recipes  
+Headers: Authorization: Bearer <token>  
+
+Request Body:  
 ```json
 {
-  "content": "Loved this recipe!"
+  "title": "Spicy Thai Green Curry",
+  "description": "A quick and flavorful weeknight dinner.",
+  "videoUrl": "https://example.com/videos/curry.mp4",
+  "ingredients": ["1 tbsp oil", "2 cloves garlic", "1 can coconut milk"],
+  "instructions": ["Heat oil in a pan...", "Add coconut milk and simmer...", "Serve hot."],
+  "isPurchasable": true
 }
 ```
 
-**Success (201)**
+Success:
 ```json
 {
-  "message": "Comment added",
-  "comment_id": "c789"
+  "success": true,
+  "message": "Recipe created successfully.",
+  "data": { "id": "r123", "title": "Spicy Thai Green Curry" }
 }
 ```
 
-**Error (401)**
+Error Response:  
 ```json
 {
-  "error": "Authentication required"
+  "success": false,
+  "message": "Missing required fields"
 }
 ```
+
+Unauthorized:  
+```json
+{
+  "success": false,
+  "message": "Unauthorized"
+}
+```
+
+---
+
+3.2 Get All Recipes
+HTTP Method: GET
+Endpoint Path: /api/recipes
+Query : page, limit
+
+Success :  
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "r123",
+      "title": "Spicy Thai Green Curry",
+      "authorId": "u456",
+      "isPurchasable": true
+    },
+    {
+      "id": "r124",
+      "title": "Quick Lemon Bars",
+      "authorId": "u789",
+      "isPurchasable": false
+    }
+  ]
+}
+```
+
+Error Response:  
+```json
+{
+  "success": false,
+  "message": "No recipes found"
+}
+```
+
+---
+
+3.3 Get Recipe by ID
+HTTP Method: GET
+Endpoint Path: /api/recipes/{id}
+
+Success Response (200 OK):  
+```json
+{
+  "success": true,
+  "data": {
+    "id": "r123",
+    "title": "Spicy Thai Green Curry",
+    "description": "A quick and flavorful weeknight dinner.",
+    "videoUrl": "https://example.com/videos/curry.mp4",
+    "ingredients": ["1 tbsp oil", "2 cloves garlic", "1 can coconut milk"],
+    "instructions": ["Heat oil in a pan...", "Add coconut milk and simmer...", "Serve hot."],
+    "authorId": "u456",
+    "isPurchasable": true,
+    "reviews": []
+  }
+}
+```
+Error Response:  
+```json
+{
+  "success": false,
+  "message": "Recipe not found"
+}
+```
+
+---
+
+3.4 Update Recipe Details
+HTTP Method: PATCH
+Endpoint Path: /api/recipes/{id}
+
+Request Body:  
+```json
+{
+  "description": "An updated description for the curry.",
+  "instructions": ["Step 1: Prep...", "Step 2: Cook...", "Step 3: Serve with rice."]
+}
+```
+
+Success:
+```json
+{ "success": true, "message": "Recipe updated successfully." }
+````
+
+Error:
+```json
+{ "success": false, "message": "Recipe not found" }
+```
+
+---
+
+4. Review Management
+
+ 4.1 Add a Review
+HTTP Method: POST
+Endpoint Path: /api/recipes/{id}/reviews
+
+Request Body:  
+```json
+{
+  "message": "How do I make a vegan lasagna?"
+}
+```
+
+
+Success:
+```json
+{
+  "success": true,
+  "response": "A vegan lasagna can be made with layers of pasta, a rich tomato sauce, and a creamy cashew-based ricotta cheese alternative...",
+  "data": {
+    "id": "msg123",
+    "userId": "u123",
+    "message": "How do I make a vegan lasagna?",
+    "response": "...",
+    "timestamp": "2025-08-12T16:45:00Z"
+  }
+}
+```
+---
