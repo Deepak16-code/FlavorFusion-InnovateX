@@ -5,7 +5,7 @@ FlavorFusion is a vibrant online platform dedicated to exploring the world of fo
 # Innovate X Group
 
 Team Members
-- [Reizenio Rodrigues]
+- [Reizenio Rodrigues](https://github.com/reizenio)
 - [Deepak Goswami](https://github.com/Deepak16-code)
 - [Rajas Kadkade](https://github.com/Rajas18)
 - [Babush Mote](https://github.com/Babush-CYBER)
