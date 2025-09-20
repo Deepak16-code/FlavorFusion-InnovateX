@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./img/RecipeLogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <title>FlavorFusion</title>
+</head>
+<body>
+
+    <!--- Navigation Bar --->
+    <div class="header">
+        <nav class="nav-bar">
+            <img src="./img/logo.png" class="brand-name">
+            <a href="#" class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </a>
+            <div class="menu-bar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Search Bar -->
+        <div class="title">Find a Recipe</div>
+        <div class="search-wrapper">
+            <div class="fa fa-search"></div>
+            <input type="text" name=""  id="search" placeholder="What do you want to eat?" onkeyup="search()">
+            <div class="fa fa-times" onclick="clearInput()" ></div>
+        </div>
+    </div>
+
+    <!-- Search Results -->
+        <div class="result">
+            <h1>Your Search Result: </h1>
+        </div>
+        
+       <!-- Main Content -->
+        <div class="card-grid" >
+            <div class="food-list" id="food-list">
+                    <p id="none" style="display: none;">Sorry, the food you were looking for was not available.</p>
+                    <div class="card card-shadow">
+                        <div class="card-header card-image">
+                            <img src="./img/Paneer Tikka Masala.jpg">
+                        </div>
+                        <div class="card-body" >
+                        <h3>Paneer Tikka Masala</h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn" onclick="getRecipeDetails()">Get Recipe</button>
+                        </div>
+                    </div>
+                    <div class="card card-shadow">
+                        <div class="card-header card-image">
+                            <img src="./img/Veg Fried Rice.jpg">
+                        </div>
+                        <div class="card-body" >
+                         <h3> Veg Fried Rice </h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn" onclick="get2ndRecipe()">Get Recipe</button>
+                        </div>
+                    </div>
+                    <div class="card card-shadow">
+                        <div class="card-header card-image">
+                            <img src="./img/Dal Tadka.jpg">
+                        </div>
+                        <div class="card-body" >
+                             <h3>Dal Tadka</h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn" onclick="get3rdRecipe()">Get Recipe</button>
+                        </div>
+                    </div>
+                    <div class="card card-shadow">
+                        <div class="card-header card-image">
+                            <img src="./img/Dhaba Style Handi Paneer.jpg">
+                        </div>
+                        <div class="card-body" >
+                             <h3>Dhaba Style Handi Paneer</h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn" onclick="get4thRecipe()">Get Recipe</button>
+                        </div>
+                    </div>
+                    <div class="card card-shadow">
+                        <div class="card-header card-image">
+                             <img src="./img/Paneer Butter Masala.jpg">
+                        </div>
+                        <div class="card-body" >
+                        <h3> Paneer Butter Masala</h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn" onclick="get5thRecipe()">Get Recipe</button>
+                        </div>
+                    </div>
+                    <div class="card card-shadow">
+                        <div class="card-header card-image">
+                            <img src="./img/Paneer Bhuna Masala.jpg">
+                        </div>
+                        <div class="card-body" >
+                        <h3> Paneer Bhuna Masala </h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn" onclick="get6thRecipe()">Get Recipe</button>
+                        </div>
+                    </div>
+                    <div class="card card-shadow">
+                        <div class="card-header card-image">
+                            <img src="./img/Dilli Wala Masala Chicken.jpg">
+                        </div>
+                        <div class="card-body" >
+                        <h3>Dilli Wala Masala Chicken </h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn" onclick="get7thRecipe()">Get Recipe</button>
+                        </div>
+                    </div>
+                    <div class="card card-shadow">
+                        <div class="card-header card-image">
+                            <img src="./img/Punjabi Lemon Chicken.jpg">
+                        </div>
+                        <div class="card-body" >
+                        <h3>Punjabi Lemon Chicken</h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn" onclick="get8thRecipe()">Get Recipe</button>
+                        </div>
+                    </div>
+                    <div class="card card-shadow">
+                        <div class="card-header card-image">
+                             <img src="./img/Classic Chicken Curry.jpg">
+                        </div>
+                        <div class="card-body" >
+                        <h3>Classic Chicken Curry</h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn" onclick="get9thRecipe()">Get Recipe</button>
+                        </div>
+                    </div>
+                    <div class="card card-shadow">
+                        <div class="card-header card-image">
+                             <img src="./img/Butter Chicken.jpg">
+                        </div>
+                        <div class="card-body" >
+                        <h3>Butter Chicken</h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn" onclick="get10thRecipe()">Get Recipe</button>
+                        </div>
+                    </div>
+                    <div class="card card-shadow">
+                        <div class="card-header card-image">
+                            <img src="./img/Kesari Shahi Chicken.jpg">
+                        </div>
+                        <div class="card-body" >
+                        <h3>Kesari Shahi Chicken</h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn" onclick="get11thRecipe()">Get Recipe</button>
+                        </div>
+                    </div>
+            </div> 
+
+            <!--Ending of Main Content-->
+
+            <!--Recipe Details-->
+            <div class = "meal-detail" id="meal-detail">
+                <!-- recipe close btn -->
+                <button type = "button" class = "btn recipe-close-btn" id = "recipe-close-btn" onclick="closeBtn()">
+                    <i class ="fas fa-times"></i>
+                </button>
+
+                <!-- recipe details -->
+               <div class="meal-content">
+                    <h2 class="meal-name">Paneer Tikka Masala</h2>
+                    <div class="meal-about">
+                        <h3 class="meal-title-about">About Meal</h3>
+                        <p class="meal-descript-about">Paneer Tikka Masala is a popular Indian dish made with marinated paneer (Indian cottage cheese) cubes grilled or baked to perfection and then simmered in a rich and creamy tomato-based gravy. It's a delightful vegetarian option that is loved by many.</p>
+                    </div>
+                    <div class = "meal-instruct">
+                        <h3>Ingredients:</h3>
+                        <p><br>250 g paneer, cut into cubes
+                            <br>1/2 cup hung yogurt
+                            <br>1 tbsp ginger-garlic paste
+                            <br>1 tsp red chili powder
+                            <br>1 tsp garam masala
+                            <br>1/2 tsp turmeric powder
+                            <br>1 tsp kasuri methi (crushed)
+                            <br>2 tbsp oil
+                            <br>1 large onion, finely chopped
+                            <br>2 cups tomato puree
+                            <br>3 tbsp cream
+                            <br>Salt to taste
+                            <br>Fresh coriander for garnish
+                        </p>
+                        <h3>Instructions:</h3>
+                        <p><br>1. Mix hung yogurt, ginger-garlic paste, red chili powder, garam masala, turmeric, kasuri methi, salt and 1 tbsp oil. Marinate paneer cubes for 30–60 minutes.
+                            <br>2. Grill or pan-fry marinated paneer until golden edges; set aside.
+                            <br>3. In a pan, heat oil and sauté onions until golden. Add ginger-garlic paste and cook briefly.
+                            <br>4. Add tomato puree and cook until oil separates and raw smell is gone.
+                            <br>5. Add spices (red chili, garam masala, salt) and simmer until thickened.
+                            <br>6. Add grilled paneer to the gravy and simmer 3–4 minutes.
+                            <br>7. Stir in cream, adjust seasoning, garnish with coriander and serve hot.
+                        </p>
+                
+                    </div>
+                    <div class = "meal-img">
+                        <img src = "./img/Paneer Tikka Masala.jpg" alt = "">
+                      </div>
+                      <div class = "meal-link">
+                        <a href="https://www.youtube.com/watch?v=kZxmErE7V2E" class="meal-link-btn">Watch Video</a>
+                    </div>
+                </div>
+            </div>
+            <div class = "second-meal-detail" id="second-meal-detail">
+                <!-- recipe close btn -->
+                <button type = "button" class = "btn recipe-close-btn" id = "recipe-close-btn" onclick="closeBtn()">
+                    <i class ="fas fa-times"></i>
+                </button>
+
+                <!-- recipe details -->
+                <div class="meal-content">
+                    <h2 class="meal-name">Veg Fried Rice</h2>
+                    <div class="meal-about">
+                        <h3 class="meal-title-about">About Meal</h3>
+                        <p class="meal-descript-about">Veg Fried Rice is a popular Indo-Chinese dish made with cooked rice, mixed vegetables, and aromatic seasonings. It's quick to make and perfect as a complete meal or side dish.</p>
+                    </div>
+                    <div class = "meal-instruct">
+                        <h3>Ingredients:</h3>
+                        <p><br>3 cups cooked white rice (preferably day-old)
+                            <br>1 cup mixed vegetables (carrot, peas, beans, capsicum) diced
+                            <br>1 small onion, chopped
+                            <br>2 cloves garlic, minced
+                            <br>2–3 tbsp soy sauce
+                            <br>2 tbsp vegetable oil
+                            <br>Salt and pepper to taste
+                            <br>Spring onions for garnish
+                        </p>
+                        <h3>Instructions:</h3>
+                        <p><br>1. Ensure rice is cooled and grains separated to avoid mushiness.
+                            <br>2. Heat oil in a wok/pan, sauté onions until translucent. Add garlic and stir briefly.
+                            <br>3. Add mixed vegetables and stir-fry until tender-crisp.
+                            <br>4. Add rice and mix well with vegetables.
+                            <br>5. Pour soy sauce and toss; season with salt and pepper. Stir-fry for 2–3 minutes.
+                            <br>6. Garnish with spring onions and serve hot.
+                            </p>
+                
+                    </div>
+                    <div class = "meal-img">
+                        <img src = "./img/Veg Fried Rice.jpg" alt = "">
+                      </div>
+                      <div class = "meal-link">
+                        <a href="https://www.youtube.com/watch?v=hoZccEa0Pqo" class="meal-link-btn" >Watch Video</a>
+                    </div>
+                </div>
+            </div>  
+            <div class = "third-meal-detail" id="third-meal-detail">
+                <!-- recipe close btn -->
+                <button type = "button" class = "btn recipe-close-btn" id = "recipe-close-btn" onclick="closeBtn()">
+                    <i class ="fas fa-times"></i>
+                </button>
+
+
+                <!-- recipe details -->
+                <div class="meal-content">
+                    <h2 class="meal-name">Dal Tadka</h2>
+                    <div class="meal-about">
+                        <h3 class="meal-title-about">About Meal</h3>
+                        <p class="meal-descript-about">Dal Tadka is a popular Indian lentil dish made with toor dal (split pigeon peas) cooked until soft and topped with a flavorful tempering of spices. It's a comfort food staple served with rice or roti.
+                        </p>
+                    </div>
+                    <div class = "meal-instruct">
+                        <h3>Ingredients:</h3>
+                        <p><br>1 cup toor dal (split pigeon peas), rinsed
+                            <br>3 cups water
+                            <br>1/2 tsp turmeric powder
+                            <br>Salt to taste
+                            <br>2 tbsp ghee or oil
+                            <br>1 tsp cumin seeds
+                            <br>4–5 garlic cloves, sliced
+                            <br>1–2 dried red chilies
+                            <br>1 small onion, finely chopped (optional)
+                            <br>2 tomatoes, chopped (optional)
+                            <br>Fresh coriander for garnish
+                        </p>
+                        <h3>Instructions:</h3>
+                        <p><br>1. Rinse dal and cook with water, turmeric and a pinch of salt until soft (pressure cooker or pot).
+                            <br>2. Mash slightly and adjust consistency by adding water as needed.
+                            <br>3. Heat ghee/oil in a small pan. Add cumin seeds, garlic slices and dried red chilies; fry until fragrant.
+                            <br>4. Pour the tempering over cooked dal. Mix well. If using onions/tomatoes, sauté them before adding the tempering.
+                            <br>5. Garnish with fresh coriander and serve hot with rice or roti.
+                            </p>
+                
+                    </div>
+                    <div class = "meal-img">
+                        <img src = "./img/Dal Tadka.jpg" alt = "">
+                      </div>
+                      <div class = "meal-link">
+                        <a href="https://www.youtube.com/watch?v=8c_scYUN5uc" class="meal-link-btn" >Watch Video</a>
+                    </div>
+                </div>
+            </div>  
+            <div class = "four-meal-detail" id="four-meal-detail">
+                <!-- recipe close btn -->
+                <button type = "button" class = "btn recipe-close-btn" id = "recipe-close-btn" onclick="closeBtn()">
+                    <i class ="fas fa-times"></i>
+                </button>
+
+
+                <!-- recipe details -->
+                <div class="meal-content">
+                    <h2 class="meal-name">Dhaba Style Handi Paneer</h2>
+                    <div class="meal-about">
+                        <h3 class="meal-title-about">About Meal</h3>
+                        <p class="meal-descript-about">Dhaba Style Handi Paneer is a rich and flavorful North Indian dish cooked in traditional dhaba style. The paneer is simmered in a spiced tomato-onion gravy that's full of robust flavors.
+                        </p>
+                    </div>
+                    <div class = "meal-instruct">
+                        <h3>Ingredients:</h3>
+                        <p><br>250 g paneer, cubed
+                            <br>2 tbsp oil
+                            <br>1 bay leaf
+                            <br>1 inch cinnamon, 2 cloves
+                            <br>1 large onion, pureed
+                            <br>2 cups tomato puree
+                            <br>1 tbsp ginger-garlic paste
+                            <br>1 tsp red chili powder
+                            <br>1 tsp garam masala
+                            <br>1/2 tsp turmeric powder
+                            <br>1/2 cup cream or cashew paste
+                            <br>Salt to taste
+                            <br>Fresh coriander for garnish
+                        </p>
+                        <h3>Instructions:</h3>
+                        <p><br>1. Heat oil, add whole spices and sauté briefly.
+                            <br>2. Add onion puree and cook until golden brown.
+                            <br>3. Add ginger-garlic paste and tomato puree; cook until oil separates.
+                            <br>4. Add spices, cream/cashew paste and simmer to get a rich gravy.
+                            <br>5. Add paneer cubes and simmer for 5–7 minutes to absorb flavors.
+                            <br>6. Garnish with coriander and serve hot.
+                        </p>
+                
+                    </div>
+                    <div class = "meal-img">
+                        <img src = "./img/Dhaba Style Handi Paneer.jpg" alt = "">
+                      </div>
+                      <div class = "meal-link">
+                        <a href="https://www.youtube.com/watch?v=92niKgS_4_I" class="meal-link-btn" >Watch Video</a>
+                    </div>
+                </div>
+            </div>  
+            <div class = "five-meal-detail" id="five-meal-detail">
+                <!-- recipe close btn -->
+                <button type = "button" class = "btn recipe-close-btn" id = "recipe-close-btn" onclick="closeBtn()">
+                    <i class ="fas fa-times"></i>
+                </button>
+
+                <!-- recipe details -->
+                <div class="meal-content">
+                    <h2 class="meal-name">Paneer Butter Masala</h2>
+                    <div class="meal-about">
+                        <h3 class="meal-title-about">About Meal</h3>
+                        <p class="meal-descript-about">Paneer Butter Masala is a Filipino soup or stew characterized by its sour and savory taste. It is most often associated with tamarind, although it can use other sour fruits and leaves as the souring agent. It is one of the more popular dishes in Filipino cuisine.
+                        </p>
+                    </div>
+                    <div class = "meal-instruct">
+                        <h3>Ingridients:</h3>
+                        <p><br>2 lbs pork belly or buto-buto
+                            <br>1 bunch spinach or kang-kong
+                            <br>3 tablespoons fish sauce
+                            <br>12 pieces string beans sitaw, cut in 2 inch length
+                            <br>2 pieces tomato quartered
+                            <br>3 pieces chili or banana pepper
+                            <br>1 tablespoons cooking oil
+                            <br>2 quarts water
+                            <br>1 piece onion sliced
+                            <br>2 pieces taro gabi, quartered
+                            <br>1 pack Paneer Butter Masala mix good for 2 liters water
+                        </p>
+                        <h3>Instruction:</h3>
+                        <p><br>1. Heat the pot and put-in the cooking oil
+                            <br>2. Sauté the onion until its layers separate from each other
+                            <br>3.Add the pork belly and cook until outer part turns light brown
+                            <br>4. Put-in the fish sauce and mix with the ingredients
+                            <br>5. Pour the water and bring to a boil
+                            <br>6. Add the taro and tomatoes then simmer for 40 minutes or until pork is tender
+                            <br>7. Put-in the Paneer Butter Masala mix and chili
+                            <br>8. Add the string beans (and other vegetables if there are any) and simmer for 5 to 8 minutes
+                            <br>9. Put-in the spinach, turn off the heat, and cover the pot. Let the spinach cook using the remaining heat in the pot.
+                            <br>10. Serve hot. Share and enjoy!
+                        </p>
+                
+                    </div>
+                    <div class = "meal-img">
+                        <img src = "./img/Paneer Butter Masala.jpg" alt = "">
+                      </div>
+                      <div class = "meal-link">
+                        <a href="https://tinyurl.com/ywbcrx4f" class="meal-link-btn" >Watch Video</a>
+                    </div>
+                </div>
+            </div> 
+            <div class = "six-meal-detail" id="six-meal-detail">
+                <!-- recipe close btn -->
+                <button type = "button" class = "btn recipe-close-btn" id = "recipe-close-btn" onclick="closeBtn()">
+                    <i class ="fas fa-times"></i>
+                </button>
+
+                <!-- recipe details -->
+                <div class="meal-content">
+                    <h2 class="meal-name">Paneer Bhuna Masala</h2>
+                    <div class="meal-about">
+                        <h3 class="meal-title-about">About Meal</h3>
+                        <p class="meal-descript-about">Paneer Bhuna Masala is a dry-style Indian curry where paneer cubes are cooked with onions, tomatoes and spices until the masala coats the paneer beautifully. It's a flavorful dish with intense spice flavors.
+                        </p>
+                    </div>
+                    <div class = "meal-instruct">
+                        <h3>Ingredients:</h3>
+                        <p><br>250 g paneer, cubed
+                            <br>2 tbsp oil
+                            <br>1 large onion, finely chopped
+                            <br>2 tomatoes, chopped or pureed
+                            <br>1 tbsp ginger-garlic paste
+                            <br>1 tsp red chili powder
+                            <br>1/2 tsp turmeric powder
+                            <br>1 tsp coriander powder
+                            <br>1/2 tsp garam masala
+                            <br>Salt to taste
+                            <br>Fresh coriander for garnish
+                        </p>
+                        <h3>Instructions:</h3>
+                        <p><br>1. Heat oil, sauté onions until golden brown then add ginger-garlic paste.
+                            <br>2. Add tomatoes and cook until the mixture becomes thick and oil separates.
+                            <br>3. Add powdered spices and stir well.
+                            <br>4. Add paneer and toss to coat in the masala; cook 4–5 minutes.
+                            <br>5. Garnish with coriander and serve hot.
+                        </p>
+                
+                    </div>
+                    <div class = "meal-img">
+                        <img src = "./img/Paneer Bhuna Masala.jpg" alt = "">
+                      </div>
+                      <div class = "meal-link">
+                        <a href="https://www.youtube.com/watch?v=5mMwSPlovr8" class="meal-link-btn" >Watch Video</a>
+                    </div>
+                </div>
+            </div> 
+            <div class = "seven-meal-detail" id="seven-meal-detail">
+                <!-- recipe close btn -->
+                <button type = "button" class = "btn recipe-close-btn" id = "recipe-close-btn" onclick="closeBtn()">
+                    <i class ="fas fa-times"></i>
+                </button>
+
+                <!-- recipe details -->
+                <div class="meal-content">
+                    <h2 class="meal-name">Dilli Wala Masala Chicken</h2>
+                    <div class="meal-about">
+                        <h3 class="meal-title-about">About Meal</h3>
+                        <p class="meal-descript-about">Dilli Wala Masala Chicken is a Delhi-style spicy chicken curry with rich flavors. This dish combines tender chicken pieces with a robust masala gravy that's perfect with rice or bread.
+                        </p>
+                    </div>
+                    <div class = "meal-instruct">
+                        <h3>Ingredients:</h3>
+                        <p><br>500 g chicken pieces
+                            <br>2 tbsp oil
+                            <br>1 large onion, sliced
+                            <br>1 tbsp ginger-garlic paste
+                            <br>2 tomatoes, pureed
+                            <br>1 tsp red chili powder
+                            <br>1/2 tsp turmeric
+                            <br>1 tsp garam masala
+                            <br>1/2 cup yogurt
+                            <br>Salt to taste
+                            <br>Fresh coriander for garnish
+                        </p>
+                        <h3>Instructions:</h3>
+                        <p><br>1. Marinate chicken with yogurt, salt, turmeric and some chili powder for 20–30 minutes.
+                            <br>2. Heat oil, sauté onions until golden then add ginger-garlic paste.
+                            <br>3. Add tomato puree and cook until oil separates.
+                            <br>4. Add spices, then the marinated chicken. Cook on medium heat until chicken is done.
+                            <br>5. Sprinkle garam masala, garnish with coriander and serve hot.
+                        </p>
+                
+                    </div>
+                    <div class = "meal-img">
+                        <img src = "./img/Dilli Wala Masala Chicken.jpg" alt = "">
+                      </div>
+                      <div class = "meal-link">
+                        <a href="https://www.youtube.com/watch?v=BjQxQHTvQ10" class="meal-link-btn" >Watch Video</a>
+                    </div>
+                </div>
+            </div> 
+            <div class = "eight-meal-detail" id="eight-meal-detail">
+                <!-- recipe close btn -->
+                <button type = "button" class = "btn recipe-close-btn" id = "recipe-close-btn" onclick="closeBtn()">
+                    <i class ="fas fa-times"></i>
+                </button>
+
+                <!-- recipe details -->
+                <div class="meal-content">
+                    <h2 class="meal-name">Punjabi Lemon Chicken</h2>
+                    <div class="meal-about">
+                        <h3 class="meal-title-about">About Meal</h3>
+                        <p class="meal-descript-about">Punjabi Lemon Chicken is a tangy and flavorful chicken dish where the meat is marinated with yogurt and lemon juice, then cooked with aromatic spices. The lemon adds a refreshing twist to this Punjabi-style preparation.
+                        </p>
+                    </div>
+                    <div class = "meal-instruct">
+                        <h3>Ingredients:</h3>
+                        <p><br>500 g chicken pieces
+                            <br>2 tbsp oil
+                            <br>1 tbsp ginger-garlic paste
+                            <br>1/2 cup yogurt
+                            <br>2 tbsp lemon juice
+                            <br>1 tsp coriander powder
+                            <br>1 tsp cumin powder
+                            <br>1/2 tsp turmeric
+                            <br>Salt to taste
+                            <br>Fresh coriander for garnish
+                        </p>
+                        <h3>Instructions:</h3>
+                        <p><br>1. Marinate chicken with yogurt, lemon juice, spices and salt for 30 minutes.
+                            <br>2. Heat oil, add ginger-garlic paste and sauté briefly.
+                            <br>3. Add marinated chicken and cook until done, stirring occasionally.
+                            <br>4. Adjust seasoning, garnish with coriander and serve.
+                        </p>
+                
+                    </div>
+                    <div class = "meal-img">
+                        <img src = "./img/Punjabi Lemon Chicken.jpg" alt = "">
+                      </div>
+                      <div class = "meal-link">
+                        <a href="https://www.youtube.com/watch?v=WukUSCEPDMQ" class="meal-link-btn" >Watch Video</a>
+                    </div>
+                </div>
+            </div> 
+            <div class = "nine-meal-detail" id="nine-meal-detail">
+                <!-- recipe close btn -->
+                <button type = "button" class = "btn recipe-close-btn" id = "recipe-close-btn" onclick="closeBtn()">
+                    <i class ="fas fa-times"></i>
+                </button>
+
+                <!-- recipe details -->
+                <div class="meal-content">
+                    <h2 class="meal-name">Classic Chicken Curry</h2>
+                    <div class="meal-about">
+                        <h3 class="meal-title-about">About Meal</h3>
+                        <p class="meal-descript-about">Classic Chicken Curry is a traditional Indian dish featuring tender chicken pieces cooked in a rich, spiced tomato and onion gravy. This homestyle curry is perfect with rice or Indian breads and is loved by everyone.
+                        </p>
+                    </div>
+                    <div class = "meal-instruct">
+                        <h3>Ingredients:</h3>
+                        <p><br>750 g chicken, cut into pieces
+                            <br>3 tbsp oil
+                            <br>2 onions, finely chopped
+                            <br>1 tbsp ginger-garlic paste
+                            <br>2 tomatoes, pureed
+                            <br>1 tsp turmeric powder
+                            <br>1 tsp red chili powder
+                            <br>1 tsp coriander powder
+                            <br>1 tsp garam masala
+                            <br>Salt to taste
+                            <br>Fresh coriander for garnish
+                        </p>
+                        <h3>Instructions:</h3>
+                        <p><br>1. Heat oil and sauté onions until golden brown. Add ginger-garlic paste and cook.
+                            <br>2. Add tomato puree and cook until oil separates.
+                            <br>3. Add spices and chicken pieces. Cook covered until chicken is tender.
+                            <br>4. Uncover, simmer to thicken gravy, garnish with coriander and serve hot.
+                        </p>
+                
+                    </div>
+                    <div class = "meal-img">
+                        <img src = "./img/Classic Chicken Curry.jpg" alt = "">
+                      </div>
+                      <div class = "meal-link">
+                        <a href="https://www.youtube.com/watch?v=DwBXXOrNIGc" class="meal-link-btn" >Watch Video</a>
+                    </div>
+                </div>
+            </div> 
+            <div class = "ten-meal-detail" id="ten-meal-detail">
+                <!-- recipe close btn -->
+                <button type = "button" class = "btn recipe-close-btn" id = "recipe-close-btn" onclick="closeBtn()">
+                    <i class ="fas fa-times"></i>
+                </button>
+
+                <!-- recipe details -->
+                <div class="meal-content">
+                    <h2 class="meal-name">Butter Chicken</h2>
+                    <div class="meal-about">
+                        <h3 class="meal-title-about">About Meal</h3>
+                        <p class="meal-descript-about">Butter Chicken (Chicken Makhani) is a rich and creamy Indian curry made with tender chicken pieces cooked in a silky tomato-butter gravy. It's one of the most popular Indian dishes worldwide.
+                        </p>
+                    </div>
+                    <div class = "meal-instruct">
+                        <h3>Ingredients:</h3>
+                        <p><br>500 g chicken (preferably boneless)
+                            <br>3 tbsp butter
+                            <br>1 cup tomato puree
+                            <br>1/2 cup cream
+                            <br>1 tbsp ginger-garlic paste
+                            <br>1 tsp red chili powder
+                            <br>1 tsp garam masala
+                            <br>1/2 tsp turmeric
+                            <br>Salt to taste
+                            <br>Kasuri methi and coriander for garnish
+                        </p>
+                        <h3>Instructions:</h3>
+                        <p><br>1. Marinate chicken with spices and a little yogurt (if recipe uses) and grill or sauté until cooked.
+                            <br>2. In a pan, heat butter, add tomato puree and cook until thick.
+                            <br>3. Add spices and cream, then add the cooked chicken and simmer for few minutes.
+                            <br>4. Finish with kasuri methi and garnish with coriander before serving.
+                        </p>
+                
+                    </div>
+                    <div class = "meal-img">
+                        <img src = "./img/Butter Chicken.jpg" alt = "">
+                      </div>
+                      <div class = "meal-link">
+                        <a href="https://www.youtube.com/watch?v=dOfgQtwusho" class="meal-link-btn" >Watch Video</a>
+                    </div>
+                </div>
+            </div> 
+            <div class = "eleven-meal-detail" id="eleven-meal-detail">
+                <!-- recipe close btn -->
+                <button type = "button" class = "btn recipe-close-btn" id = "recipe-close-btn" onclick="closeBtn()">
+                    <i class ="fas fa-times"></i>
+                </button>
+
+                <!-- recipe details -->
+            <div class="meal-content">
+                <h2 class="meal-name">Kesari Shahi Chicken</h2>
+                <div class="meal-about">
+                    <h3 class="meal-title-about">About Meal</h3>
+                    <p class="meal-descript-about">Kesari Shahi Chicken is an elegant Awadhi-style dish featuring tender chicken pieces cooked with aromatic spices and enriched with saffron. This royal recipe delivers rich flavors with a luxurious golden color from the saffron.</p>
+                </div>
+                <div class = "meal-instruct">
+                    <h3>Ingredients:</h3>
+                    <p><br>600 g chicken pieces
+                        <br>2 tbsp ghee or oil
+                        <br>1 large onion, sliced
+                        <br>1/4 cup grated/finely chopped onion paste
+                        <br>1 tbsp ginger-garlic paste
+                        <br>1/4 tsp saffron soaked in warm milk
+                        <br>1 tsp garam masala
+                        <br>Salt to taste
+                        <br>Fresh coriander for garnish
+                    </p>
+                    <h3>Instructions:</h3>
+                    <p><br>1. Heat ghee, sauté onions until golden then add ginger-garlic paste.
+                        <br>2. Add chicken pieces and brown lightly. Add spices and a little water.
+                        <br>3. Simmer until chicken is cooked and tender.
+                        <br>4. Add saffron milk near the end and simmer for a couple minutes.
+                        <br>5. Garnish with coriander and serve hot.
+                    </p>
+            
+                </div>
+                <div class = "meal-img">
+                    <img src = "./img/Kesari Shahi Chicken.jpg" alt = "">
+                </div>
+                <div class = "meal-link">
+                    <a href="https://www.youtube.com/watch?v=Qwe5P9fN24Y" class="meal-link-btn" >Watch Video</a>
+                </div>
+            </div>
+        </div>
+            
+            
+        </div>
+            <!--Ending of Recipe Details-->
+
+            <!--Footer-->
+    <div class="footer">
+        <div class="social-btn">
+            <a href="https://www.facebook.com/Cmedsss" target="_blank" ><i class="	fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/tiaanmeds/" target="_blank" ><i class="	fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/tianmeds/" target="_blank"><i class="	fab fa-linkedin"></i></a>
+            <a href="https://github.com/TianMeds" target="_blank" "><i class="	fab fa-github"></i></a>
+        </div>
+            <div class="quick-bar">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        <p>Copyright &copy; 2022 Christian Medallada. All right reserved</p>  
+    </div>
+
+    <!--Ending of Footer-->
+
+<!--Script for Javascript-->
+<script src="./assets/index.js"></script>
+</body>
+</html>
