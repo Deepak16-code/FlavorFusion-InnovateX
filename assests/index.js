@@ -11,7 +11,7 @@ hamburger.addEventListener('click', () => {
 const search = () => {
 
   //CaLling the id Search for the Input and making the value input to an uppercase 
-  const searchBox =  document.getElementById("search").value.toUpperCase();
+  const searchBomx =  document.getElementById("search").value.toUpperCase();
 
   //Getting the whole food list 
   const storeitems = document.getElementById("food-list")
