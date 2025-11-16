@@ -68,7 +68,7 @@ body{
     list-style: none;
     margin: 0 1rem;
 }
-.menu-bar li a{
+.nav-bar ul li a{
     text-decoration: none;
     background-color:hsla(0, 0%, 0%, 0);
     padding: 1rem;
@@ -102,7 +102,8 @@ body{
   font-size: 5rem;
   padding-top: 1.5rem;
   font-weight: 600;
-  color: #F7B801;
+  color: #F7B801 !important;
+  text-shadow: 0 0 8px rgba(0,0,0,0.4);
 }
 
 .search-wrapper{
@@ -1204,5 +1205,6 @@ body{
   display: flex;
   align-items: flex-start;
 }
+
 
 
