@@ -74,6 +74,7 @@ body{
     background-color:hsla(0, 0%, 0%, 0);
     padding: 1rem;
     display: block;
+    color: #FFD166;
 }
 .menu-bar li:hover{
     background-color:hsla(0, 0%, 0%, 0);
@@ -102,7 +103,7 @@ body{
   font-size: 5rem;
   padding-top: 1.5rem;
   font-weight: 600;
-  color: var(--color3);
+  color: #F7B801;
 }
 
 .search-wrapper{
@@ -1204,3 +1205,4 @@ body{
   display: flex;
   align-items: flex-start;
 }
+
